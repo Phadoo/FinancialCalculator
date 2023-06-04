@@ -42,7 +42,7 @@ namespace FinancialCalculator
 
         private void netBtn_Click(object sender, System.EventArgs e)
         {
-            Intent i = new Intent(this, typeof(NetActivity));
+            Intent i = new Intent(this, typeof(InvestmentActivity));
             StartActivity(i);
         }
 

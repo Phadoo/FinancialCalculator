@@ -13,29 +13,29 @@
 // 
 #pragma warning disable 1591
 
-namespace FinancialCalculator.savingsCalc {
-    using System.Diagnostics;
+namespace FinancialCalculator.investCalc {
     using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    using System.Web.Services.Protocols;
-    using System.Web.Services;
     
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="Soap Service TestBinding", Namespace="urn:soaptest")]
-    public partial class SoapServiceTest : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    [System.Web.Services.WebServiceBindingAttribute(Name="Investment CalculatorBinding", Namespace="urn:soaptest")]
+    public partial class InvestmentCalculator : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback calculateMonthlyContributionOperationCompleted;
+        private System.Threading.SendOrPostCallback calculate_final_amountOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public SoapServiceTest() {
-            this.Url = "http://192.168.1.141/IT140P_MP/savingsservice.php";
+        public InvestmentCalculator() {
+            this.Url = "http://192.168.1.141/IT140P_MP/investservice.php";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -70,41 +70,43 @@ namespace FinancialCalculator.savingsCalc {
         }
         
         /// <remarks/>
-        public event calculateMonthlyContributionCompletedEventHandler calculateMonthlyContributionCompleted;
+        public event calculate_final_amountCompletedEventHandler calculate_final_amountCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.141/IT140P_MP/savingsservice.php/calculateMonthlyContribution", RequestNamespace="", ResponseNamespace="")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.141/IT140P_MP/investservice.php/calculate_final_amount", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public string calculateMonthlyContribution(double savingsGoal, double startingBalance, double growthTime, double interestRate) {
-            object[] results = this.Invoke("calculateMonthlyContribution", new object[] {
-                        savingsGoal,
-                        startingBalance,
-                        growthTime,
-                        interestRate});
+        public string calculate_final_amount(decimal startingAmount, decimal yearsToGrow, decimal returnRate, decimal additionalContribution, string contributionTiming) {
+            object[] results = this.Invoke("calculate_final_amount", new object[] {
+                        startingAmount,
+                        yearsToGrow,
+                        returnRate,
+                        additionalContribution,
+                        contributionTiming});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void calculateMonthlyContributionAsync(double savingsGoal, double startingBalance, double growthTime, double interestRate) {
-            this.calculateMonthlyContributionAsync(savingsGoal, startingBalance, growthTime, interestRate, null);
+        public void calculate_final_amountAsync(decimal startingAmount, decimal yearsToGrow, decimal returnRate, decimal additionalContribution, string contributionTiming) {
+            this.calculate_final_amountAsync(startingAmount, yearsToGrow, returnRate, additionalContribution, contributionTiming, null);
         }
         
         /// <remarks/>
-        public void calculateMonthlyContributionAsync(double savingsGoal, double startingBalance, double growthTime, double interestRate, object userState) {
-            if ((this.calculateMonthlyContributionOperationCompleted == null)) {
-                this.calculateMonthlyContributionOperationCompleted = new System.Threading.SendOrPostCallback(this.OncalculateMonthlyContributionOperationCompleted);
+        public void calculate_final_amountAsync(decimal startingAmount, decimal yearsToGrow, decimal returnRate, decimal additionalContribution, string contributionTiming, object userState) {
+            if ((this.calculate_final_amountOperationCompleted == null)) {
+                this.calculate_final_amountOperationCompleted = new System.Threading.SendOrPostCallback(this.Oncalculate_final_amountOperationCompleted);
             }
-            this.InvokeAsync("calculateMonthlyContribution", new object[] {
-                        savingsGoal,
-                        startingBalance,
-                        growthTime,
-                        interestRate}, this.calculateMonthlyContributionOperationCompleted, userState);
+            this.InvokeAsync("calculate_final_amount", new object[] {
+                        startingAmount,
+                        yearsToGrow,
+                        returnRate,
+                        additionalContribution,
+                        contributionTiming}, this.calculate_final_amountOperationCompleted, userState);
         }
         
-        private void OncalculateMonthlyContributionOperationCompleted(object arg) {
-            if ((this.calculateMonthlyContributionCompleted != null)) {
+        private void Oncalculate_final_amountOperationCompleted(object arg) {
+            if ((this.calculate_final_amountCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.calculateMonthlyContributionCompleted(this, new calculateMonthlyContributionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.calculate_final_amountCompleted(this, new calculate_final_amountCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -128,18 +130,18 @@ namespace FinancialCalculator.savingsCalc {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
-    public delegate void calculateMonthlyContributionCompletedEventHandler(object sender, calculateMonthlyContributionCompletedEventArgs e);
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    public delegate void calculate_final_amountCompletedEventHandler(object sender, calculate_final_amountCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class calculateMonthlyContributionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class calculate_final_amountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal calculateMonthlyContributionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal calculate_final_amountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

@@ -1,7 +1,87 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/startingAmountTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType= "numberDecimal"
+        android:hint="Starting Amount" />
+
+    <EditText
+        android:id="@+id/yearsTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType= "number"
+        android:hint="Years To Grow (integer only)" />
+
+    <EditText
+        android:id="@+id/rateTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType= "numberDecimal"
+        android:hint="Return Rate (in percent)" />
+
+    <EditText
+        android:id="@+id/addContributionTxt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType= "numberDecimal"
+        android:hint="Additional Contribution" />
+
+     <TextView
+        android:text="Contribute at the:"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView2" />
+    <RadioGroup
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/radioTiming">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="beginning"
+            android:id="@+id/beginning" />
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="end"
+            android:id="@+id/end" />
+    </RadioGroup>
+
+    <TextView
+        android:text="Final Amount: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="12dp"
+        android:id="@+id/finalAmountTxt" />
+    <TextView
+        android:text="Total Contribution: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalContributionTxt" />
+    <TextView
+        android:text="Total Interest: "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/totalInterestTxt" />
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate" />
 </LinearLayout>

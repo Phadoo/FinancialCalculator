@@ -1,14 +1,10 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+
 
 namespace FinancialCalculator
 {
@@ -18,8 +14,6 @@ namespace FinancialCalculator
         private EditText loanInput;
         private EditText interestInput;
         private EditText loanTermInput;
-        private EditText taxesInput;
-        private EditText insuranceInput;
         private TextView monthlyPaymentResult;
         private TextView totalInterestResult;
         private LinearLayout amortizationItemsLayout;
@@ -33,8 +27,6 @@ namespace FinancialCalculator
             loanInput = FindViewById<EditText>(Resource.Id.loanInput);
             interestInput = FindViewById<EditText>(Resource.Id.interestInput);
             loanTermInput = FindViewById<EditText>(Resource.Id.loanTermInput);
-            taxesInput = FindViewById<EditText>(Resource.Id.taxesInput);
-            insuranceInput = FindViewById<EditText>(Resource.Id.insuranceInput);
             monthlyPaymentResult = FindViewById<TextView>(Resource.Id.monthlyPaymentResult);
             totalInterestResult = FindViewById<TextView>(Resource.Id.totalInterestResult);
             amortizationItemsLayout = FindViewById<LinearLayout>(Resource.Id.amortizationItemsLayout);
@@ -47,57 +39,49 @@ namespace FinancialCalculator
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             // Get user inputs
-
-            double loanAmount = Convert.ToDouble(loanInput.Text);
-            double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
-            int loanTerm = Convert.ToInt32(loanTermInput.Text);
-            
-            double propertyTaxes = 0;
-            double insurance = 0;
-
-            if (!string.IsNullOrEmpty(taxesInput.Text))
+            try 
             {
-                propertyTaxes = Convert.ToDouble(taxesInput.Text);
+                double loanAmount = Convert.ToDouble(loanInput.Text);
+                double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
+                int loanTerm = Convert.ToInt32(loanTermInput.Text);
+
+                mortgageCalculation.MortgageCalculator mortgageCalculate = new mortgageCalculation.MortgageCalculator();
+
+                double monthlyPayment = mortgageCalculate.get_mortgage(loanAmount, interestRate, loanTerm);
+
+                double totalInterest = mortgageCalculate.get_totalinterest(loanAmount, interestRate, loanTerm);
+
+                // Display results
+                monthlyPaymentResult.Text = monthlyPayment.ToString("C2");
+                totalInterestResult.Text = totalInterest.ToString("C2");
+
+                // Calculate and display loan amortization schedule
+                CalculateAmortizationSchedule(loanAmount, interestRate, loanTerm);
+            }
+            catch (Exception ex)
+            {
+                
             }
 
-            if (!string.IsNullOrEmpty(insuranceInput.Text))
-            {
-                insurance = Convert.ToDouble(insuranceInput.Text);
-            }
-
-            // Calculate monthly mortgage payment
-            double monthlyInterestRate = interestRate / 12;
-            int numberOfPayments = loanTerm * 12;
-            double monthlyPayment = (loanAmount * monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-
-            // Calculate total interest paid over the loan term
-            double totalInterest = (monthlyPayment * numberOfPayments) - loanAmount;
-
-            // Display results
-            monthlyPaymentResult.Text = monthlyPayment.ToString("C2");
-            totalInterestResult.Text = totalInterest.ToString("C2");
-
-            // Calculate and display loan amortization schedule
-            CalculateAmortizationSchedule(loanAmount, interestRate, loanTerm, monthlyPayment);
         }
 
 
 
-        private void CalculateAmortizationSchedule(double loanAmount, double interestRate, int loanTerm, double monthlyPayment)
+        private void CalculateAmortizationSchedule(double loanAmount, double interestRate, int loanTerm)
         {
             amortizationItemsLayout.RemoveAllViews();
 
-            double monthlyInterestRate = interestRate / 12;
-            int numberOfPayments = loanTerm * 12;
+            // Create an instance of the service client
+            var client = new mortgageCalculation.MortgageCalculator();
 
-            double remainingBalance = loanAmount;
-            double interestPayment = 0;
-            for (int i = 1; i <= numberOfPayments; i++)
+            // Call the get_mortgage method
+            double monthlyPayment = client.get_mortgage(loanAmount, interestRate, loanTerm);
+
+            // Call the create_amortizationschedule method
+            mortgageCalculation.AmortizationSchedule[] amortizationSchedule = client.create_amortizationschedule(loanAmount, interestRate, loanTerm, monthlyPayment);
+
+            foreach (var scheduleItem in amortizationSchedule)
             {
-                interestPayment = remainingBalance * monthlyInterestRate;
-                double principalPayment = monthlyPayment - interestPayment;
-                remainingBalance -= principalPayment;
-
                 // Create a new row in the amortization schedule layout
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
                 LinearLayout rowLayout = new LinearLayout(this);
@@ -106,15 +90,15 @@ namespace FinancialCalculator
 
                 // Create and add TextViews for payment number, interest, principal, and remaining balance
                 TextView paymentNumberText = new TextView(this);
-                paymentNumberText.Text = i.ToString();
+                paymentNumberText.Text = scheduleItem.paymentNumber.ToString();
                 rowLayout.AddView(paymentNumberText);
 
                 TextView interestText = new TextView(this);
-                interestText.Text = interestPayment.ToString("C2");
+                interestText.Text = scheduleItem.interest.ToString("C2");
                 rowLayout.AddView(interestText);
 
                 TextView principalText = new TextView(this);
-                principalText.Text = principalPayment.ToString("C2");
+                principalText.Text = scheduleItem.principal.ToString("C2");
                 rowLayout.AddView(principalText);
 
                 TextView totalAmountText = new TextView(this);
@@ -122,9 +106,8 @@ namespace FinancialCalculator
                 rowLayout.AddView(totalAmountText);
 
                 TextView balanceText = new TextView(this);
-                balanceText.Text = remainingBalance.ToString("C2");
+                balanceText.Text = scheduleItem.balance.ToString("C2");
                 rowLayout.AddView(balanceText);
-
 
                 // Add spacing between TextViews
                 int spacing = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 8, Resources.DisplayMetrics);
