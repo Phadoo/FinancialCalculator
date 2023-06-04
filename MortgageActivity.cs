@@ -19,8 +19,6 @@ namespace FinancialCalculator
         private EditText loanInput;
         private EditText interestInput;
         private EditText loanTermInput;
-        private EditText taxesInput;
-        private EditText insuranceInput;
         private TextView monthlyPaymentResult;
         private TextView totalInterestResult;
         private LinearLayout amortizationItemsLayout;
@@ -34,8 +32,6 @@ namespace FinancialCalculator
             loanInput = FindViewById<EditText>(Resource.Id.loanInput);
             interestInput = FindViewById<EditText>(Resource.Id.interestInput);
             loanTermInput = FindViewById<EditText>(Resource.Id.loanTermInput);
-            taxesInput = FindViewById<EditText>(Resource.Id.taxesInput);
-            insuranceInput = FindViewById<EditText>(Resource.Id.insuranceInput);
             monthlyPaymentResult = FindViewById<TextView>(Resource.Id.monthlyPaymentResult);
             totalInterestResult = FindViewById<TextView>(Resource.Id.totalInterestResult);
             amortizationItemsLayout = FindViewById<LinearLayout>(Resource.Id.amortizationItemsLayout);
