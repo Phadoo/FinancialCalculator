@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace FinancialCalculator.savingsCalc {
+namespace FinancialCalculator.roiCalc {
     using System;
     using System.Web.Services;
     using System.Diagnostics;
@@ -29,13 +29,13 @@ namespace FinancialCalculator.savingsCalc {
     [System.Web.Services.WebServiceBindingAttribute(Name="Soap Service TestBinding", Namespace="urn:soaptest")]
     public partial class SoapServiceTest : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
-        private System.Threading.SendOrPostCallback calculateMonthlyContributionOperationCompleted;
+        private System.Threading.SendOrPostCallback get_countOperationCompleted;
         
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
         public SoapServiceTest() {
-            this.Url = "http://192.168.1.141/IT140P_MP/savingsservice.php";
+            this.Url = "http://192.168.1.141/IT140P_MP/roiservice.php";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -70,41 +70,39 @@ namespace FinancialCalculator.savingsCalc {
         }
         
         /// <remarks/>
-        public event calculateMonthlyContributionCompletedEventHandler calculateMonthlyContributionCompleted;
+        public event get_countCompletedEventHandler get_countCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.141/IT140P_MP/savingsservice.php/calculateMonthlyContribution", RequestNamespace="", ResponseNamespace="")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.141/IT140P_MP/roiservice.php/get_count", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public string calculateMonthlyContribution(double savingsGoal, double startingBalance, double growthTime, double interestRate) {
-            object[] results = this.Invoke("calculateMonthlyContribution", new object[] {
-                        savingsGoal,
-                        startingBalance,
-                        growthTime,
-                        interestRate});
+        public string get_count(string profit, string cost, string years) {
+            object[] results = this.Invoke("get_count", new object[] {
+                        profit,
+                        cost,
+                        years});
             return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void calculateMonthlyContributionAsync(double savingsGoal, double startingBalance, double growthTime, double interestRate) {
-            this.calculateMonthlyContributionAsync(savingsGoal, startingBalance, growthTime, interestRate, null);
+        public void get_countAsync(string profit, string cost, string years) {
+            this.get_countAsync(profit, cost, years, null);
         }
         
         /// <remarks/>
-        public void calculateMonthlyContributionAsync(double savingsGoal, double startingBalance, double growthTime, double interestRate, object userState) {
-            if ((this.calculateMonthlyContributionOperationCompleted == null)) {
-                this.calculateMonthlyContributionOperationCompleted = new System.Threading.SendOrPostCallback(this.OncalculateMonthlyContributionOperationCompleted);
+        public void get_countAsync(string profit, string cost, string years, object userState) {
+            if ((this.get_countOperationCompleted == null)) {
+                this.get_countOperationCompleted = new System.Threading.SendOrPostCallback(this.Onget_countOperationCompleted);
             }
-            this.InvokeAsync("calculateMonthlyContribution", new object[] {
-                        savingsGoal,
-                        startingBalance,
-                        growthTime,
-                        interestRate}, this.calculateMonthlyContributionOperationCompleted, userState);
+            this.InvokeAsync("get_count", new object[] {
+                        profit,
+                        cost,
+                        years}, this.get_countOperationCompleted, userState);
         }
         
-        private void OncalculateMonthlyContributionOperationCompleted(object arg) {
-            if ((this.calculateMonthlyContributionCompleted != null)) {
+        private void Onget_countOperationCompleted(object arg) {
+            if ((this.get_countCompleted != null)) {
                 System.Web.Services.Protocols.InvokeCompletedEventArgs invokeArgs = ((System.Web.Services.Protocols.InvokeCompletedEventArgs)(arg));
-                this.calculateMonthlyContributionCompleted(this, new calculateMonthlyContributionCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
+                this.get_countCompleted(this, new get_countCompletedEventArgs(invokeArgs.Results, invokeArgs.Error, invokeArgs.Cancelled, invokeArgs.UserState));
             }
         }
         
@@ -129,17 +127,17 @@ namespace FinancialCalculator.savingsCalc {
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
-    public delegate void calculateMonthlyContributionCompletedEventHandler(object sender, calculateMonthlyContributionCompletedEventArgs e);
+    public delegate void get_countCompletedEventHandler(object sender, get_countCompletedEventArgs e);
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    public partial class calculateMonthlyContributionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+    public partial class get_countCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
         
-        internal calculateMonthlyContributionCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+        internal get_countCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }

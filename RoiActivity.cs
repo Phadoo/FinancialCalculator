@@ -79,7 +79,7 @@ namespace FinancialCalculator
 
             else
             {
-                WebReference.SoapServiceTest ws = new WebReference.SoapServiceTest();
+                roiCalc.SoapServiceTest ws = new roiCalc.SoapServiceTest();
 
 
                 string gotValue = ws.get_count(editTextRevenue.Text, editTextInvestment.Text, editTextYears.Text);
@@ -96,7 +96,6 @@ namespace FinancialCalculator
 
 
             }
-
 
         }
 

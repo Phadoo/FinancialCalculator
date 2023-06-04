@@ -80,6 +80,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\roiCalc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\savingsCalc\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -93,16 +98,21 @@
     <None Include="Web References\mortgageCalculation\AmortizationSchedule.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
+    <None Include="Web References\mortgageCalculation\mortgageservice.wsdl" />
     <None Include="Web References\mortgageCalculation\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\mortgageCalculation\service.wsdl" />
-    <None Include="Web References\savingsCalc\item.wsdl" />
+    <None Include="Web References\roiCalc\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\roiCalc\roiservice.wsdl" />
     <None Include="Web References\savingsCalc\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\savingsCalc\savingsservice.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\colors.xml" />
@@ -190,10 +200,10 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.1.103/IT140P/FinancialCalc/service.php%3fwsdl">
+    <WebReferenceUrl Include="http://192.168.1.141/IT140P_MP/mortgageservice.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\mortgageCalculation\</RelPath>
-      <UpdateFromURL>http://192.168.1.103/IT140P/FinancialCalc/service.php%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://192.168.1.141/IT140P_MP/mortgageservice.php%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -203,10 +213,23 @@
       <CachedSettingsPropName>
       </CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.1.8/Calculator/service.php/%3fwsdl">
+    <WebReferenceUrl Include="http://192.168.1.141/IT140P_MP/roiservice.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\roiCalc\</RelPath>
+      <UpdateFromURL>http://192.168.1.141/IT140P_MP/roiservice.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.1.141/IT140P_MP/savingsservice.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\savingsCalc\</RelPath>
-      <UpdateFromURL>http://192.168.1.8/Calculator/service.php/%3fwsdl</UpdateFromURL>
+      <UpdateFromURL>http://192.168.1.141/IT140P_MP/savingsservice.php%3fwsdl</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

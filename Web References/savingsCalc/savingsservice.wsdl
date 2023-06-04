@@ -24,7 +24,7 @@
   <wsdl:binding name="Soap Service TestBinding" type="tns:Soap Service TestPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="calculateMonthlyContribution">
-      <soap:operation soapAction="http://192.168.1.8/Calculator/service.php//calculateMonthlyContribution" style="rpc" />
+      <soap:operation soapAction="http://192.168.1.141/IT140P_MP/savingsservice.php/calculateMonthlyContribution" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -35,7 +35,7 @@
   </wsdl:binding>
   <wsdl:service name="Soap Service Test">
     <wsdl:port name="Soap Service TestPort" binding="tns:Soap Service TestBinding">
-      <soap:address location="http://192.168.1.8/Calculator/service.php/" />
+      <soap:address location="http://192.168.1.141/IT140P_MP/savingsservice.php" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

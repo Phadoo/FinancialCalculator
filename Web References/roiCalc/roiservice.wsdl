@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:soaptest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:soaptest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:soaptest">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="get_countRequest">
+    <wsdl:part name="profit" type="xsd:string" />
+    <wsdl:part name="cost" type="xsd:string" />
+    <wsdl:part name="years" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="get_countResponse">
+    <wsdl:part name="return" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:portType name="Soap Service TestPortType">
+    <wsdl:operation name="get_count">
+      <wsdl:input message="tns:get_countRequest" />
+      <wsdl:output message="tns:get_countResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Soap Service TestBinding" type="tns:Soap Service TestPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="get_count">
+      <soap:operation soapAction="http://192.168.1.141/IT140P_MP/roiservice.php/get_count" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Soap Service Test">
+    <wsdl:port name="Soap Service TestPort" binding="tns:Soap Service TestBinding">
+      <soap:address location="http://192.168.1.141/IT140P_MP/roiservice.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
