@@ -13,7 +13,7 @@
     <wsdl:part name="interestRate" type="xsd:double" />
   </wsdl:message>
   <wsdl:message name="calculateMonthlyContributionResponse">
-    <wsdl:part name="return" type="xsd:double" />
+    <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="Soap Service TestPortType">
     <wsdl:operation name="calculateMonthlyContribution">

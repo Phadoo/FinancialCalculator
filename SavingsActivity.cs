@@ -65,15 +65,15 @@ namespace FinancialCalculator
 
             if (radioButton1.Checked)
             {
-                double monthlyContrib = savCalc.calculateMonthlyContribution(savings, starting, growth, interest);
-                textView6.Text = string.Format("SUGGESTED MONTHLY CONTRIBUTION: {0}", monthlyContrib);
+                string monthlyContrib = savCalc.calculateMonthlyContribution(savings, starting, growth, interest);
+                textView6.Text = monthlyContrib;
             }
 
             else if (radioButton2.Checked)
             {
                 growth = growth * 12;
-                double monthlyContrib = savCalc.calculateMonthlyContribution(savings, starting, growth, interest);
-                textView6.Text = string.Format("SUGGESTED MONTHLY CONTRIBUTION: {0}", monthlyContrib);
+                string monthlyContrib = savCalc.calculateMonthlyContribution(savings, starting, growth, interest);
+                textView6.Text = monthlyContrib;
             }
         }
     }
