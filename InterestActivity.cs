@@ -3,8 +3,10 @@ using Android.Content;
 using Android.Icu.Text;
 using Android.OS;
 using Android.Runtime;
+using Android.Text;
 using Android.Views;
 using Android.Widget;
+using Java.Lang;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,6 +93,10 @@ namespace FinancialCalculator
             // Set the OnTouchListener for the EditText to disable manual input
             edit2.SetOnTouchListener(new EditTextTouchListener());
 
+            // Set input filters for editText1 and editText2
+            edit.SetFilters(new IInputFilter[] { new DecimalDigitsInputFilter() });
+            edit1.SetFilters(new IInputFilter[] { new DecimalDigitsInputFilter() });
+
         }
 
         private void TimeRange_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
@@ -105,6 +111,23 @@ namespace FinancialCalculator
             {
                 // Disable manual input by intercepting touch events
                 return true;
+            }
+        }
+
+        public class DecimalDigitsInputFilter : Java.Lang.Object, IInputFilter
+        {
+            public ICharSequence FilterFormatted(ICharSequence source, int start, int end, ISpanned dest, int dstart, int dend)
+            {
+                string filtered = "";
+                for (int i = start; i < end; i++)
+                {
+                    char character = source.CharAt(i);
+                    if (char.IsDigit(character) || character == '.')
+                    {
+                        filtered += character;
+                    }
+                }
+                return new Java.Lang.String(filtered);
             }
         }
     }
