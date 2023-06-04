@@ -45,7 +45,7 @@ namespace FinancialCalculator
                 double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
                 int loanTerm = Convert.ToInt32(loanTermInput.Text);
 
-                mortgageCalculation.FinancialCalculator mortgageCalculate = new mortgageCalculation.FinancialCalculator();
+                mortgageCalculation.MortgageCalculator mortgageCalculate = new mortgageCalculation.MortgageCalculator();
 
                 double monthlyPayment = mortgageCalculate.get_mortgage(loanAmount, interestRate, loanTerm);
 
@@ -72,7 +72,7 @@ namespace FinancialCalculator
             amortizationItemsLayout.RemoveAllViews();
 
             // Create an instance of the service client
-            var client = new mortgageCalculation.FinancialCalculator();
+            var client = new mortgageCalculation.MortgageCalculator();
 
             // Call the get_mortgage method
             double monthlyPayment = client.get_mortgage(loanAmount, interestRate, loanTerm);

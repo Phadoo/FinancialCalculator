@@ -71,10 +71,15 @@
     <Compile Include="InterestActivity.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="MortgageActivity.cs" />
-    <Compile Include="NetActivity.cs" />
+    <Compile Include="InvestmentActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RoiActivity.cs" />
+    <Compile Include="Web References\investCalc\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\mortgageCalculation\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -95,6 +100,11 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
+    <None Include="Web References\investCalc\investservice.wsdl" />
+    <None Include="Web References\investCalc\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\mortgageCalculation\AmortizationSchedule.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -200,6 +210,19 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://192.168.1.141/IT140P_MP/investservice.php%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\investCalc\</RelPath>
+      <UpdateFromURL>http://192.168.1.141/IT140P_MP/investservice.php%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://192.168.1.141/IT140P_MP/mortgageservice.php%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\mortgageCalculation\</RelPath>
