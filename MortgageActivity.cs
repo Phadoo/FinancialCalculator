@@ -1,15 +1,10 @@
 ﻿using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Services.Description;
+
 
 namespace FinancialCalculator
 {
@@ -44,23 +39,30 @@ namespace FinancialCalculator
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             // Get user inputs
+            try 
+            {
+                double loanAmount = Convert.ToDouble(loanInput.Text);
+                double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
+                int loanTerm = Convert.ToInt32(loanTermInput.Text);
 
-            double loanAmount = Convert.ToDouble(loanInput.Text);
-            double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
-            int loanTerm = Convert.ToInt32(loanTermInput.Text);
+                mortgageCalculation.FinancialCalculator mortgageCalculate = new mortgageCalculation.FinancialCalculator();
 
-            mortgageCalculation.FinancialCalculator mortgageCalculate = new mortgageCalculation.FinancialCalculator();
+                double monthlyPayment = mortgageCalculate.get_mortgage(loanAmount, interestRate, loanTerm);
 
-            double monthlyPayment = mortgageCalculate.get_mortgage(loanAmount, interestRate, loanTerm);
+                double totalInterest = mortgageCalculate.get_totalinterest(loanAmount, interestRate, loanTerm);
 
-            double totalInterest = mortgageCalculate.get_totalinterest(loanAmount, interestRate, loanTerm);
+                // Display results
+                monthlyPaymentResult.Text = monthlyPayment.ToString("C2");
+                totalInterestResult.Text = totalInterest.ToString("C2");
 
-            // Display results
-            monthlyPaymentResult.Text = monthlyPayment.ToString("C2");
-            totalInterestResult.Text = totalInterest.ToString("C2");
+                // Calculate and display loan amortization schedule
+                CalculateAmortizationSchedule(loanAmount, interestRate, loanTerm);
+            }
+            catch (Exception ex)
+            {
+                
+            }
 
-            // Calculate and display loan amortization schedule
-            CalculateAmortizationSchedule(loanAmount, interestRate, loanTerm);
         }
 
 
