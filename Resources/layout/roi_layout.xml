@@ -1,7 +1,206 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="#F5F5F5"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Investment Amount"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextInvestment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter investment amount"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="8dp" />
+
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Revenue Amount"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextRevenue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter revenue amount"
+        android:inputType="numberDecimal"
+        android:layout_marginBottom="8dp" />
+
+     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Number of Years"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/editTextYears"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter number of years"
+        android:inputType="number"
+        android:layout_marginBottom="8dp" />
+
+
+    <Button
+        android:id="@+id/buttonCalculate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calculate"
+        android:backgroundTint="#00CC00"
+        android:layout_marginBottom="8dp" />
+
+     <Button
+        android:id="@+id/buttonBack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Back to Home"
+        android:backgroundTint="#00CC00"
+        android:layout_marginBottom="8dp" />
+
+
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+
+    <TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E5FFCC"
+        android:stretchColumns="*">
+
+         <TableRow
+            android:id="@+id/zz"
+            android:layout_width="match_parent"
+             android:layout_marginTop="8dp"
+               android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/ResultsLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:text="Results" />
+
+            <TextView
+                android:id="@+id/sample"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/investmentGainRow"
+            android:layout_width="match_parent"
+             android:layout_marginTop="8dp"
+               android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/investmentGainLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Investment Gain" />
+
+            <TextView
+                android:id="@+id/investmentGainValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/roiRow"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+               android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/roiLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="ROI" />
+
+            <TextView
+                android:id="@+id/roiValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/annualRoiRow"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+               android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/annualRoiLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Annual ROI" />
+
+            <TextView
+                android:id="@+id/annualRoiValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="" />
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/investmentLengthRow"
+            android:layout_width="match_parent"
+            android:layout_marginTop="8dp"
+               android:layout_marginBottom="8dp"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/investmentLengthLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="Investment Length" />
+
+            <TextView
+                android:id="@+id/investmentLengthValue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:text="" />
+        </TableRow>
+
+    </TableLayout>
+
 
 </LinearLayout>
