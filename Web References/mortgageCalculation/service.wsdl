@@ -6,11 +6,11 @@
       <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
       <xsd:complexType name="AmortizationSchedule">
         <xsd:all>
-          <xsd:element name="PaymentNumber" type="xsd:int" />
-          <xsd:element name="InterestPayment" type="xsd:double" />
-          <xsd:element name="PrincipalPayment" type="xsd:double" />
-          <xsd:element name="TotalAmount" type="xsd:double" />
-          <xsd:element name="RemainingBalance" type="xsd:double" />
+          <xsd:element name="paymentNumber" type="xsd:int" />
+          <xsd:element name="interest" type="xsd:double" />
+          <xsd:element name="principal" type="xsd:double" />
+          <xsd:element name="totalAmount" type="xsd:double" />
+          <xsd:element name="balance" type="xsd:double" />
         </xsd:all>
       </xsd:complexType>
       <xsd:complexType name="AmortizationScheduleArray">
@@ -47,7 +47,7 @@
   <wsdl:message name="create_amortizationscheduleResponse">
     <wsdl:part name="amortizationSchedule" type="tns:AmortizationScheduleArray" />
   </wsdl:message>
-  <wsdl:portType name="Mortgage CalculatorPortType">
+  <wsdl:portType name="Financial CalculatorPortType">
     <wsdl:operation name="get_mortgage">
       <documentation>Calculates the mortgage payment.</documentation>
       <wsdl:input message="tns:get_mortgageRequest" />
@@ -64,7 +64,7 @@
       <wsdl:output message="tns:create_amortizationscheduleResponse" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="Mortgage CalculatorBinding" type="tns:Mortgage CalculatorPortType">
+  <wsdl:binding name="Financial CalculatorBinding" type="tns:Financial CalculatorPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="get_mortgage">
       <soap:operation soapAction="http://localhost/IT140P/FinancialCalc/service.php#get_mortgage" style="rpc" />
@@ -94,8 +94,8 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="Mortgage Calculator">
-    <wsdl:port name="Mortgage CalculatorPort" binding="tns:Mortgage CalculatorBinding">
+  <wsdl:service name="Financial Calculator">
+    <wsdl:port name="Financial CalculatorPort" binding="tns:Financial CalculatorBinding">
       <soap:address location="http://192.168.1.103/IT140P/FinancialCalc/service.php" />
     </wsdl:port>
   </wsdl:service>

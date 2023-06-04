@@ -26,9 +26,9 @@ namespace FinancialCalculator.mortgageCalculation {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="Mortgage CalculatorBinding", Namespace="http://localhost/IT140P/FinancialCalc/service.php")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="Financial CalculatorBinding", Namespace="http://localhost/IT140P/FinancialCalc/service.php")]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AmortizationSchedule))]
-    public partial class MortgageCalculator : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class FinancialCalculator : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback get_mortgageOperationCompleted;
         
@@ -39,7 +39,7 @@ namespace FinancialCalculator.mortgageCalculation {
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public MortgageCalculator() {
+        public FinancialCalculator() {
             this.Url = "http://192.168.1.103/IT140P/FinancialCalc/service.php";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
@@ -216,16 +216,16 @@ namespace FinancialCalculator.mortgageCalculation {
         
         private int paymentNumberField;
         
-        private double interestPaymentField;
+        private double interestField;
         
-        private double principalPaymentField;
+        private double principalField;
         
         private double totalAmountField;
         
-        private double remainingBalanceField;
+        private double balanceField;
         
         /// <remarks/>
-        public int PaymentNumber {
+        public int paymentNumber {
             get {
                 return this.paymentNumberField;
             }
@@ -235,27 +235,27 @@ namespace FinancialCalculator.mortgageCalculation {
         }
         
         /// <remarks/>
-        public double InterestPayment {
+        public double interest {
             get {
-                return this.interestPaymentField;
+                return this.interestField;
             }
             set {
-                this.interestPaymentField = value;
+                this.interestField = value;
             }
         }
         
         /// <remarks/>
-        public double PrincipalPayment {
+        public double principal {
             get {
-                return this.principalPaymentField;
+                return this.principalField;
             }
             set {
-                this.principalPaymentField = value;
+                this.principalField = value;
             }
         }
         
         /// <remarks/>
-        public double TotalAmount {
+        public double totalAmount {
             get {
                 return this.totalAmountField;
             }
@@ -265,12 +265,12 @@ namespace FinancialCalculator.mortgageCalculation {
         }
         
         /// <remarks/>
-        public double RemainingBalance {
+        public double balance {
             get {
-                return this.remainingBalanceField;
+                return this.balanceField;
             }
             set {
-                this.remainingBalanceField = value;
+                this.balanceField = value;
             }
         }
     }

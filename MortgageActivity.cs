@@ -53,7 +53,7 @@ namespace FinancialCalculator
             double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
             int loanTerm = Convert.ToInt32(loanTermInput.Text);
 
-            mortgageCalculation.MortgageCalculator mortgageCalculate = new mortgageCalculation.MortgageCalculator();
+            mortgageCalculation.FinancialCalculator mortgageCalculate = new mortgageCalculation.FinancialCalculator();
 
             double monthlyPayment = mortgageCalculate.get_mortgage(loanAmount, interestRate, loanTerm);
 
@@ -64,20 +64,24 @@ namespace FinancialCalculator
             totalInterestResult.Text = totalInterest.ToString("C2");
 
             // Calculate and display loan amortization schedule
-            CalculateAmortizationSchedule(loanAmount, interestRate, loanTerm, monthlyPayment);
+            CalculateAmortizationSchedule(loanAmount, interestRate, loanTerm);
         }
 
 
 
-        private void CalculateAmortizationSchedule(double loanAmount, double interestRate, int loanTerm, double monthlyPayment)
+        private void CalculateAmortizationSchedule(double loanAmount, double interestRate, int loanTerm)
         {
             amortizationItemsLayout.RemoveAllViews();
 
-            // Create an instance of the service class
-            var mortgageCalculate = new mortgageCalculation.MortgageCalculator();
+            // Create an instance of the service client
+            var client = new mortgageCalculation.FinancialCalculator();
+
+            // Call the get_mortgage method
+            double monthlyPayment = client.get_mortgage(loanAmount, interestRate, loanTerm);
 
             // Call the create_amortizationschedule method
-            var amortizationSchedule = mortgageCalculate.create_amortizationschedule(loanAmount, interestRate, loanTerm, monthlyPayment);
+            mortgageCalculation.AmortizationSchedule[] amortizationSchedule = client.create_amortizationschedule(loanAmount, interestRate, loanTerm, monthlyPayment);
+
             foreach (var scheduleItem in amortizationSchedule)
             {
                 // Create a new row in the amortization schedule layout
@@ -88,15 +92,15 @@ namespace FinancialCalculator
 
                 // Create and add TextViews for payment number, interest, principal, and remaining balance
                 TextView paymentNumberText = new TextView(this);
-                paymentNumberText.Text = scheduleItem.PaymentNumber.ToString();
+                paymentNumberText.Text = scheduleItem.paymentNumber.ToString();
                 rowLayout.AddView(paymentNumberText);
 
                 TextView interestText = new TextView(this);
-                interestText.Text = scheduleItem.InterestPayment.ToString("C2");
+                interestText.Text = scheduleItem.interest.ToString("C2");
                 rowLayout.AddView(interestText);
 
                 TextView principalText = new TextView(this);
-                principalText.Text = scheduleItem.PrincipalPayment.ToString("C2");
+                principalText.Text = scheduleItem.principal.ToString("C2");
                 rowLayout.AddView(principalText);
 
                 TextView totalAmountText = new TextView(this);
@@ -104,7 +108,7 @@ namespace FinancialCalculator
                 rowLayout.AddView(totalAmountText);
 
                 TextView balanceText = new TextView(this);
-                balanceText.Text = scheduleItem.RemainingBalance.ToString("C2");
+                balanceText.Text = scheduleItem.balance.ToString("C2");
                 rowLayout.AddView(balanceText);
 
                 // Add spacing between TextViews
