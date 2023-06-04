@@ -48,7 +48,7 @@ namespace FinancialCalculator
 
         private void curBtn_Click(object sender, System.EventArgs e)
         {
-            Intent i = new Intent(this, typeof(ConverterActivity));
+            Intent i = new Intent(this, typeof(SavingsActivity));
             StartActivity(i);
         }
 

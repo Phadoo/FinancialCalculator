@@ -88,7 +88,7 @@
                     android:id="@+id/imageButton3"/>
 
                 <TextView
-                    android:text="Currency Converter"
+                    android:text="Savings Goal Calculator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
