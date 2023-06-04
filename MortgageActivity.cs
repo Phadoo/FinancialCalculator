@@ -33,8 +33,6 @@ namespace FinancialCalculator
             loanInput = FindViewById<EditText>(Resource.Id.loanInput);
             interestInput = FindViewById<EditText>(Resource.Id.interestInput);
             loanTermInput = FindViewById<EditText>(Resource.Id.loanTermInput);
-            taxesInput = FindViewById<EditText>(Resource.Id.taxesInput);
-            insuranceInput = FindViewById<EditText>(Resource.Id.insuranceInput);
             monthlyPaymentResult = FindViewById<TextView>(Resource.Id.monthlyPaymentResult);
             totalInterestResult = FindViewById<TextView>(Resource.Id.totalInterestResult);
             amortizationItemsLayout = FindViewById<LinearLayout>(Resource.Id.amortizationItemsLayout);
@@ -51,19 +49,6 @@ namespace FinancialCalculator
             double loanAmount = Convert.ToDouble(loanInput.Text);
             double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
             int loanTerm = Convert.ToInt32(loanTermInput.Text);
-            
-            double propertyTaxes = 0;
-            double insurance = 0;
-
-            if (!string.IsNullOrEmpty(taxesInput.Text))
-            {
-                propertyTaxes = Convert.ToDouble(taxesInput.Text);
-            }
-
-            if (!string.IsNullOrEmpty(insuranceInput.Text))
-            {
-                insurance = Convert.ToDouble(insuranceInput.Text);
-            }
 
             // Calculate monthly mortgage payment
             double monthlyInterestRate = interestRate / 12;
