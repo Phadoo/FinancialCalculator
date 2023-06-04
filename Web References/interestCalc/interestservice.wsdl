@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="urn:fincal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:fincal" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:fincal">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="compoundInterestRequest">
+    <wsdl:part name="initialBalance" type="xsd:double" />
+    <wsdl:part name="interestRate" type="xsd:double" />
+    <wsdl:part name="appliedInterest" type="xsd:string" />
+    <wsdl:part name="timeElapsed" type="xsd:double" />
+    <wsdl:part name="ratePeriod" type="xsd:string" />
+  </wsdl:message>
+  <wsdl:message name="compoundInterestResponse">
+    <wsdl:part name="return" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:portType name="Financial CalculatorPortType">
+    <wsdl:operation name="compoundInterest">
+      <wsdl:input message="tns:compoundInterestRequest" />
+      <wsdl:output message="tns:compoundInterestResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Financial CalculatorBinding" type="tns:Financial CalculatorPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="compoundInterest">
+      <soap:operation soapAction="http://192.168.1.219/IT140P_MP/interestservice.php/compoundInterest" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Financial Calculator">
+    <wsdl:port name="Financial CalculatorPort" binding="tns:Financial CalculatorBinding">
+      <soap:address location="http://192.168.1.219/IT140P_MP/interestservice.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

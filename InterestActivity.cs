@@ -17,7 +17,7 @@ namespace FinancialCalculator
     [Activity(Label = "InterestActivity")]
     public class InterestActivity : Activity
     {
-        TextView txt, txt1, txt2, txt3;
+        TextView txt, txt1, txt2, txt3, txt4;
         EditText edit, edit1, edit2;
         Spinner spin, spin1;
         RadioGroup time;
@@ -40,6 +40,7 @@ namespace FinancialCalculator
             txt1 = FindViewById<TextView>(Resource.Id.textView2);
             txt2 = FindViewById<TextView>(Resource.Id.textView3);
             txt3 = FindViewById<TextView>(Resource.Id.textView4);
+            txt4 = FindViewById<TextView>(Resource.Id.textView5);
             rad = FindViewById<RadioButton>(Resource.Id.radioButton1);
             rad1 = FindViewById<RadioButton>(Resource.Id.radioButton2);
             time = FindViewById<RadioGroup>(Resource.Id.radioGroup1);
@@ -52,9 +53,12 @@ namespace FinancialCalculator
             txt1.Text = "Interest Rate";
             txt2.Text = "Compound Interval";
             txt3.Text = "Time Horizon";
+            txt4.Text = " ";
             rad.Text = "Years";
             rad1.Text = "Months";
             calculate.Text = "CALCULATE";
+
+            calculate.Click += Calculate_Click;
 
             // for Interest Rate
             List<string> spinnerValues = new List<string>
@@ -95,6 +99,17 @@ namespace FinancialCalculator
             edit.SetFilters(new IInputFilter[] { new DecimalDigitsInputFilter() });
             edit1.SetFilters(new IInputFilter[] { new DecimalDigitsInputFilter() });
 
+        }
+
+        private void Calculate_Click(object sender, EventArgs e)
+        {
+            interestCalc.FinancialCalculator ws = new interestCalc.FinancialCalculator();
+
+            string appliedInterest = spin1.SelectedItem.ToString();
+            string ratePeriod = spin.SelectedItem.ToString();
+            string compute = ws.compoundInterest( float.Parse(edit.Text), float.Parse(edit1.Text), appliedInterest, float.Parse(edit2.Text), ratePeriod).ToString();
+
+            txt4.Text = compute;
         }
 
         private void TimeRange_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)
