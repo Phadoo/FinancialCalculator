@@ -14,21 +14,21 @@
 #pragma warning disable 1591
 
 namespace FinancialCalculator.mortgageCalculation {
-    using System.Diagnostics;
     using System;
+    using System.Web.Services;
+    using System.Diagnostics;
+    using System.Web.Services.Protocols;
     using System.Xml.Serialization;
     using System.ComponentModel;
-    using System.Web.Services.Protocols;
-    using System.Web.Services;
     
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Web.Services.WebServiceBindingAttribute(Name="Financial CalculatorBinding", Namespace="http://localhost/IT140P/FinancialCalc/service.php")]
+    [System.Web.Services.WebServiceBindingAttribute(Name="Mortgage CalculatorBinding", Namespace="urn:soaptest")]
     [System.Xml.Serialization.SoapIncludeAttribute(typeof(AmortizationSchedule))]
-    public partial class FinancialCalculator : System.Web.Services.Protocols.SoapHttpClientProtocol {
+    public partial class MortgageCalculator : System.Web.Services.Protocols.SoapHttpClientProtocol {
         
         private System.Threading.SendOrPostCallback get_mortgageOperationCompleted;
         
@@ -39,8 +39,8 @@ namespace FinancialCalculator.mortgageCalculation {
         private bool useDefaultCredentialsSetExplicitly;
         
         /// <remarks/>
-        public FinancialCalculator() {
-            this.Url = "http://192.168.1.103/IT140P/FinancialCalc/service.php";
+        public MortgageCalculator() {
+            this.Url = "http://192.168.1.141/IT140P_MP/mortgageservice.php";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -211,7 +211,7 @@ namespace FinancialCalculator.mortgageCalculation {
     [System.SerializableAttribute()]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
-    [System.Xml.Serialization.SoapTypeAttribute(Namespace="http://localhost/IT140P/FinancialCalc/service.php")]
+    [System.Xml.Serialization.SoapTypeAttribute(Namespace="urn:soaptest")]
     public partial class AmortizationSchedule {
         
         private int paymentNumberField;

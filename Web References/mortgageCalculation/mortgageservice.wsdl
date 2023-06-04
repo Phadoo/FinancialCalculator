@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://localhost/IT140P/FinancialCalc/service.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://localhost/IT140P/FinancialCalc/service.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:soaptest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:soaptest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
-    <xsd:schema targetNamespace="http://localhost/IT140P/FinancialCalc/service.php">
+    <xsd:schema targetNamespace="urn:soaptest">
       <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
       <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
       <xsd:complexType name="AmortizationSchedule">
@@ -47,7 +47,7 @@
   <wsdl:message name="create_amortizationscheduleResponse">
     <wsdl:part name="amortizationSchedule" type="tns:AmortizationScheduleArray" />
   </wsdl:message>
-  <wsdl:portType name="Financial CalculatorPortType">
+  <wsdl:portType name="Mortgage CalculatorPortType">
     <wsdl:operation name="get_mortgage">
       <documentation>Calculates the mortgage payment.</documentation>
       <wsdl:input message="tns:get_mortgageRequest" />
@@ -64,7 +64,7 @@
       <wsdl:output message="tns:create_amortizationscheduleResponse" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="Financial CalculatorBinding" type="tns:Financial CalculatorPortType">
+  <wsdl:binding name="Mortgage CalculatorBinding" type="tns:Mortgage CalculatorPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="get_mortgage">
       <soap:operation soapAction="http://localhost/IT140P/FinancialCalc/service.php#get_mortgage" style="rpc" />
@@ -94,9 +94,9 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="Financial Calculator">
-    <wsdl:port name="Financial CalculatorPort" binding="tns:Financial CalculatorBinding">
-      <soap:address location="http://192.168.1.103/IT140P/FinancialCalc/service.php" />
+  <wsdl:service name="Mortgage Calculator">
+    <wsdl:port name="Mortgage CalculatorPort" binding="tns:Mortgage CalculatorBinding">
+      <soap:address location="http://192.168.1.141/IT140P_MP/mortgageservice.php" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

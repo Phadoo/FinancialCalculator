@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/scrollView1">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -111,7 +111,7 @@
                     android:id="@+id/imageButton4" />
 
                 <TextView
-                    android:text="Net Worth \nCalculator"
+                    android:text="Investment Calculator"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
@@ -133,7 +133,8 @@
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="center">
 
                 <ImageButton
                     android:src="@drawable/ic_mortgage1"
@@ -180,5 +181,5 @@
         </LinearLayout>
 
     </LinearLayout>
-    
+
 </ScrollView>

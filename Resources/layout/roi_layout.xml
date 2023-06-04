@@ -60,7 +60,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Calculate"
-        android:backgroundTint="#00CC00"
         android:layout_marginBottom="8dp" />
 
      <Button
@@ -68,7 +67,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Back to Home"
-        android:backgroundTint="#00CC00"
         android:layout_marginBottom="8dp" />
 
 
@@ -86,7 +84,7 @@
         android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E5FFCC"
+        android:background="#b6daf2"
         android:stretchColumns="*">
 
          <TableRow
