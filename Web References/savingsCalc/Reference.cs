@@ -75,13 +75,13 @@ namespace FinancialCalculator.savingsCalc {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.8/Calculator/service.php//calculateMonthlyContribution", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public double calculateMonthlyContribution(double savingsGoal, double startingBalance, double growthTime, double interestRate) {
+        public string calculateMonthlyContribution(double savingsGoal, double startingBalance, double growthTime, double interestRate) {
             object[] results = this.Invoke("calculateMonthlyContribution", new object[] {
                         savingsGoal,
                         startingBalance,
                         growthTime,
                         interestRate});
-            return ((double)(results[0]));
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
@@ -145,10 +145,10 @@ namespace FinancialCalculator.savingsCalc {
         }
         
         /// <remarks/>
-        public double Result {
+        public string Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((double)(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }
