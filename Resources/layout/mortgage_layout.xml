@@ -53,7 +53,7 @@
                     android:id="@+id/interestInput" />
 
                 <TextView
-                    android:text="Interest Rate (Compound)"
+                    android:text="Interest Rate (Percent)"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
@@ -226,28 +226,12 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="Payment"
+                    android:text="Month"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="#000000"
                     android:gravity="center"
                     android:id="@+id/paymentLabel" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:text="Principal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000000"
-                    android:gravity="center"
-                    android:id="@+id/principalLabel" />
 
             </LinearLayout>
 
@@ -267,6 +251,36 @@
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="Principal Amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:id="@+id/principalAmountLabel" />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:text="Total Amount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000000"
+                    android:gravity="center"
+                    android:id="@+id/totalAmountLabel" />
+
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
