@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Web.Services.Description;
 
 namespace FinancialCalculator
 {
@@ -51,27 +52,12 @@ namespace FinancialCalculator
             double loanAmount = Convert.ToDouble(loanInput.Text);
             double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
             int loanTerm = Convert.ToInt32(loanTermInput.Text);
-            
-            double propertyTaxes = 0;
-            double insurance = 0;
 
-            if (!string.IsNullOrEmpty(taxesInput.Text))
-            {
-                propertyTaxes = Convert.ToDouble(taxesInput.Text);
-            }
+            mortgageCalculation.MortgageCalculator mortgageCalculate = new mortgageCalculation.MortgageCalculator();
 
-            if (!string.IsNullOrEmpty(insuranceInput.Text))
-            {
-                insurance = Convert.ToDouble(insuranceInput.Text);
-            }
+            double monthlyPayment = mortgageCalculate.get_mortgage(loanAmount, interestRate, loanTerm);
 
-            // Calculate monthly mortgage payment
-            double monthlyInterestRate = interestRate / 12;
-            int numberOfPayments = loanTerm * 12;
-            double monthlyPayment = (loanAmount * monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + monthlyInterestRate, numberOfPayments) - 1);
-
-            // Calculate total interest paid over the loan term
-            double totalInterest = (monthlyPayment * numberOfPayments) - loanAmount;
+            double totalInterest = mortgageCalculate.get_totalinterest(loanAmount, interestRate, loanTerm);
 
             // Display results
             monthlyPaymentResult.Text = monthlyPayment.ToString("C2");
@@ -87,17 +73,13 @@ namespace FinancialCalculator
         {
             amortizationItemsLayout.RemoveAllViews();
 
-            double monthlyInterestRate = interestRate / 12;
-            int numberOfPayments = loanTerm * 12;
+            // Create an instance of the service class
+            var mortgageCalculate = new mortgageCalculation.MortgageCalculator();
 
-            double remainingBalance = loanAmount;
-            double interestPayment = 0;
-            for (int i = 1; i <= numberOfPayments; i++)
+            // Call the create_amortizationschedule method
+            var amortizationSchedule = mortgageCalculate.create_amortizationschedule(loanAmount, interestRate, loanTerm, monthlyPayment);
+            foreach (var scheduleItem in amortizationSchedule)
             {
-                interestPayment = remainingBalance * monthlyInterestRate;
-                double principalPayment = monthlyPayment - interestPayment;
-                remainingBalance -= principalPayment;
-
                 // Create a new row in the amortization schedule layout
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.WrapContent);
                 LinearLayout rowLayout = new LinearLayout(this);
@@ -106,15 +88,15 @@ namespace FinancialCalculator
 
                 // Create and add TextViews for payment number, interest, principal, and remaining balance
                 TextView paymentNumberText = new TextView(this);
-                paymentNumberText.Text = i.ToString();
+                paymentNumberText.Text = scheduleItem.PaymentNumber.ToString();
                 rowLayout.AddView(paymentNumberText);
 
                 TextView interestText = new TextView(this);
-                interestText.Text = interestPayment.ToString("C2");
+                interestText.Text = scheduleItem.InterestPayment.ToString("C2");
                 rowLayout.AddView(interestText);
 
                 TextView principalText = new TextView(this);
-                principalText.Text = principalPayment.ToString("C2");
+                principalText.Text = scheduleItem.PrincipalPayment.ToString("C2");
                 rowLayout.AddView(principalText);
 
                 TextView totalAmountText = new TextView(this);
@@ -122,9 +104,8 @@ namespace FinancialCalculator
                 rowLayout.AddView(totalAmountText);
 
                 TextView balanceText = new TextView(this);
-                balanceText.Text = remainingBalance.ToString("C2");
+                balanceText.Text = scheduleItem.RemainingBalance.ToString("C2");
                 rowLayout.AddView(balanceText);
-
 
                 // Add spacing between TextViews
                 int spacing = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 8, Resources.DisplayMetrics);

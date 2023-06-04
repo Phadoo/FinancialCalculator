@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="http://localhost/IT140P/FinancialCalc/service.php" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="http://localhost/IT140P/FinancialCalc/service.php" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://localhost/IT140P/FinancialCalc/service.php">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+      <xsd:complexType name="AmortizationSchedule">
+        <xsd:all>
+          <xsd:element name="PaymentNumber" type="xsd:int" />
+          <xsd:element name="InterestPayment" type="xsd:double" />
+          <xsd:element name="PrincipalPayment" type="xsd:double" />
+          <xsd:element name="TotalAmount" type="xsd:double" />
+          <xsd:element name="RemainingBalance" type="xsd:double" />
+        </xsd:all>
+      </xsd:complexType>
+      <xsd:complexType name="AmortizationScheduleArray">
+        <xsd:complexContent mixed="false">
+          <xsd:restriction base="SOAP-ENC:Array">
+            <xsd:attribute wsdl:arrayType="tns:AmortizationSchedule[]" ref="SOAP-ENC:arrayType" />
+          </xsd:restriction>
+        </xsd:complexContent>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="get_mortgageRequest">
+    <wsdl:part name="loanAmount" type="xsd:double" />
+    <wsdl:part name="interestRate" type="xsd:double" />
+    <wsdl:part name="loanTerm" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="get_mortgageResponse">
+    <wsdl:part name="monthlyPayment" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="get_totalinterestRequest">
+    <wsdl:part name="loanAmount" type="xsd:double" />
+    <wsdl:part name="interestRate" type="xsd:double" />
+    <wsdl:part name="loanTerm" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="get_totalinterestResponse">
+    <wsdl:part name="totalInterest" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="create_amortizationscheduleRequest">
+    <wsdl:part name="loanAmount" type="xsd:double" />
+    <wsdl:part name="interestRate" type="xsd:double" />
+    <wsdl:part name="loanTerm" type="xsd:int" />
+    <wsdl:part name="monthlyPayment" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="create_amortizationscheduleResponse">
+    <wsdl:part name="amortizationSchedule" type="tns:AmortizationScheduleArray" />
+  </wsdl:message>
+  <wsdl:portType name="Mortgage CalculatorPortType">
+    <wsdl:operation name="get_mortgage">
+      <documentation>Calculates the mortgage payment.</documentation>
+      <wsdl:input message="tns:get_mortgageRequest" />
+      <wsdl:output message="tns:get_mortgageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="get_totalinterest">
+      <documentation>Calculates the total interest paid over the loan term.</documentation>
+      <wsdl:input message="tns:get_totalinterestRequest" />
+      <wsdl:output message="tns:get_totalinterestResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="create_amortizationschedule">
+      <documentation>Creates an amortization schedule.</documentation>
+      <wsdl:input message="tns:create_amortizationscheduleRequest" />
+      <wsdl:output message="tns:create_amortizationscheduleResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Mortgage CalculatorBinding" type="tns:Mortgage CalculatorPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="get_mortgage">
+      <soap:operation soapAction="http://localhost/IT140P/FinancialCalc/service.php#get_mortgage" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://localhost/IT140P/FinancialCalc/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://localhost/IT140P/FinancialCalc/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_totalinterest">
+      <soap:operation soapAction="http://localhost/IT140P/FinancialCalc/service.php#get_totalinterest" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://localhost/IT140P/FinancialCalc/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://localhost/IT140P/FinancialCalc/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="create_amortizationschedule">
+      <soap:operation soapAction="http://localhost/IT140P/FinancialCalc/service.php#create_amortizationschedule" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" namespace="http://localhost/IT140P/FinancialCalc/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" namespace="http://localhost/IT140P/FinancialCalc/service.php" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Mortgage Calculator">
+    <wsdl:port name="Mortgage CalculatorPort" binding="tns:Mortgage CalculatorBinding">
+      <soap:address location="http://192.168.1.103/IT140P/FinancialCalc/service.php" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
