@@ -59,8 +59,6 @@ namespace FinancialCalculator
             // for Interest Rate
             List<string> spinnerValues = new List<string>
             {
-                "Daily",
-                "Weekly",
                 "Monthly",
                 "Quarterly",
                 "Yearly"
