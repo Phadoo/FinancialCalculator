@@ -47,19 +47,19 @@ namespace FinancialCalculator
         private void CalculateButton_Click(object sender, EventArgs e)
         {
             // Get user inputs
+
             double loanAmount = Convert.ToDouble(loanInput.Text);
             double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
             int loanTerm = Convert.ToInt32(loanTermInput.Text);
-            double propertyTaxes = 0; // Initialize property taxes with default value
-            double insurance = 0; // Initialize insurance with default value
+            
+            double propertyTaxes = 0;
+            double insurance = 0;
 
-            // Check and assign property taxes if provided
             if (!string.IsNullOrEmpty(taxesInput.Text))
             {
                 propertyTaxes = Convert.ToDouble(taxesInput.Text);
             }
 
-            // Check and assign insurance if provided
             if (!string.IsNullOrEmpty(insuranceInput.Text))
             {
                 insurance = Convert.ToDouble(insuranceInput.Text);
@@ -68,7 +68,7 @@ namespace FinancialCalculator
             // Calculate monthly mortgage payment
             double monthlyInterestRate = interestRate / 12;
             int numberOfPayments = loanTerm * 12;
-            double monthlyPayment = (loanAmount * monthlyInterestRate * numberOfPayments) / (numberOfPayments);
+            double monthlyPayment = (loanAmount * monthlyInterestRate * Math.Pow(1 + monthlyInterestRate, numberOfPayments)) / (Math.Pow(1 + monthlyInterestRate, numberOfPayments) - 1);
 
             // Calculate total interest paid over the loan term
             double totalInterest = (monthlyPayment * numberOfPayments) - loanAmount;
@@ -81,8 +81,12 @@ namespace FinancialCalculator
             CalculateAmortizationSchedule(loanAmount, interestRate, loanTerm, monthlyPayment);
         }
 
+
+
         private void CalculateAmortizationSchedule(double loanAmount, double interestRate, int loanTerm, double monthlyPayment)
         {
+            amortizationItemsLayout.RemoveAllViews();
+
             double monthlyInterestRate = interestRate / 12;
             int numberOfPayments = loanTerm * 12;
 
@@ -91,11 +95,7 @@ namespace FinancialCalculator
             for (int i = 1; i <= numberOfPayments; i++)
             {
                 interestPayment = remainingBalance * monthlyInterestRate;
-
-                // Calculate principal payment
                 double principalPayment = monthlyPayment - interestPayment;
-
-                // Update remaining balance
                 remainingBalance -= principalPayment;
 
                 // Create a new row in the amortization schedule layout
@@ -117,17 +117,23 @@ namespace FinancialCalculator
                 principalText.Text = principalPayment.ToString("C2");
                 rowLayout.AddView(principalText);
 
+                TextView totalAmountText = new TextView(this);
+                totalAmountText.Text = monthlyPayment.ToString("C2");
+                rowLayout.AddView(totalAmountText);
+
                 TextView balanceText = new TextView(this);
                 balanceText.Text = remainingBalance.ToString("C2");
                 rowLayout.AddView(balanceText);
+
 
                 // Add spacing between TextViews
                 int spacing = (int)TypedValue.ApplyDimension(ComplexUnitType.Dip, 8, Resources.DisplayMetrics);
                 LinearLayout.LayoutParams textViewParams = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WrapContent, 1);
                 textViewParams.SetMargins(spacing, 0, spacing, 0);
                 paymentNumberText.LayoutParameters = textViewParams;
-                interestText.LayoutParameters = textViewParams;
                 principalText.LayoutParameters = textViewParams;
+                interestText.LayoutParameters = textViewParams;
+                totalAmountText.LayoutParameters = textViewParams;
                 balanceText.LayoutParameters = textViewParams;
 
                 // Add the row to the amortization schedule layout
