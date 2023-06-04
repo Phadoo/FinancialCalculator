@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:soaptest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:soaptest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="urn:soaptest">
+      <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+      <xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="calculateMonthlyContributionRequest">
+    <wsdl:part name="savingsGoal" type="xsd:double" />
+    <wsdl:part name="startingBalance" type="xsd:double" />
+    <wsdl:part name="growthTime" type="xsd:double" />
+    <wsdl:part name="interestRate" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:message name="calculateMonthlyContributionResponse">
+    <wsdl:part name="return" type="xsd:double" />
+  </wsdl:message>
+  <wsdl:portType name="Soap Service TestPortType">
+    <wsdl:operation name="calculateMonthlyContribution">
+      <wsdl:input message="tns:calculateMonthlyContributionRequest" />
+      <wsdl:output message="tns:calculateMonthlyContributionResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Soap Service TestBinding" type="tns:Soap Service TestPortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="calculateMonthlyContribution">
+      <soap:operation soapAction="http://192.168.1.8/Calculator/service.php//calculateMonthlyContribution" style="rpc" />
+      <wsdl:input>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Soap Service Test">
+    <wsdl:port name="Soap Service TestPort" binding="tns:Soap Service TestBinding">
+      <soap:address location="http://192.168.1.8/Calculator/service.php/" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
