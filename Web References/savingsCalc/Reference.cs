@@ -23,7 +23,7 @@ namespace FinancialCalculator.savingsCalc {
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="Soap Service TestBinding", Namespace="urn:soaptest")]
@@ -35,7 +35,7 @@ namespace FinancialCalculator.savingsCalc {
         
         /// <remarks/>
         public SoapServiceTest() {
-            this.Url = "http://192.168.1.141/IT140P_MP/savingsservice.php";
+            this.Url = "http://192.168.1.219/IT140P_MP/savingsservice.php";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -73,7 +73,7 @@ namespace FinancialCalculator.savingsCalc {
         public event calculateMonthlyContributionCompletedEventHandler calculateMonthlyContributionCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.141/IT140P_MP/savingsservice.php/calculateMonthlyContribution", RequestNamespace="", ResponseNamespace="")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.219/IT140P_MP/savingsservice.php/calculateMonthlyContribution", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public string calculateMonthlyContribution(double savingsGoal, double startingBalance, double growthTime, double interestRate) {
             object[] results = this.Invoke("calculateMonthlyContribution", new object[] {
@@ -128,11 +128,11 @@ namespace FinancialCalculator.savingsCalc {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     public delegate void calculateMonthlyContributionCompletedEventHandler(object sender, calculateMonthlyContributionCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4161.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class calculateMonthlyContributionCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

@@ -75,23 +75,23 @@ namespace FinancialCalculator.interestCalc {
         /// <remarks/>
         [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.219/IT140P_MP/interestservice.php/compoundInterest", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
-        public double compoundInterest(double initialBalance, double interestRate, string appliedInterest, double timeElapsed, string ratePeriod) {
+        public string compoundInterest(decimal initialBalance, decimal interestRate, string appliedInterest, decimal timeElapsed, string ratePeriod) {
             object[] results = this.Invoke("compoundInterest", new object[] {
                         initialBalance,
                         interestRate,
                         appliedInterest,
                         timeElapsed,
                         ratePeriod});
-            return ((double)(results[0]));
+            return ((string)(results[0]));
         }
         
         /// <remarks/>
-        public void compoundInterestAsync(double initialBalance, double interestRate, string appliedInterest, double timeElapsed, string ratePeriod) {
+        public void compoundInterestAsync(decimal initialBalance, decimal interestRate, string appliedInterest, decimal timeElapsed, string ratePeriod) {
             this.compoundInterestAsync(initialBalance, interestRate, appliedInterest, timeElapsed, ratePeriod, null);
         }
         
         /// <remarks/>
-        public void compoundInterestAsync(double initialBalance, double interestRate, string appliedInterest, double timeElapsed, string ratePeriod, object userState) {
+        public void compoundInterestAsync(decimal initialBalance, decimal interestRate, string appliedInterest, decimal timeElapsed, string ratePeriod, object userState) {
             if ((this.compoundInterestOperationCompleted == null)) {
                 this.compoundInterestOperationCompleted = new System.Threading.SendOrPostCallback(this.OncompoundInterestOperationCompleted);
             }
@@ -147,10 +147,10 @@ namespace FinancialCalculator.interestCalc {
         }
         
         /// <remarks/>
-        public double Result {
+        public string Result {
             get {
                 this.RaiseExceptionIfNecessary();
-                return ((double)(this.results[0]));
+                return ((string)(this.results[0]));
             }
         }
     }

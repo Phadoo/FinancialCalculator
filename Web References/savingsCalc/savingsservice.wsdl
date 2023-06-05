@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="urn:soaptest" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:soaptest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tns="urn:soaptest" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns="http://schemas.xmlsoap.org/wsdl/" targetNamespace="urn:soaptest" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <xsd:schema targetNamespace="urn:soaptest">
       <xsd:import namespace="http://schemas.xmlsoap.org/soap/encoding/" />
@@ -24,7 +24,7 @@
   <wsdl:binding name="Soap Service TestBinding" type="tns:Soap Service TestPortType">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
     <wsdl:operation name="calculateMonthlyContribution">
-      <soap:operation soapAction="http://192.168.1.141/IT140P_MP/savingsservice.php/calculateMonthlyContribution" style="rpc" />
+      <soap:operation soapAction="http://192.168.1.219/IT140P_MP/savingsservice.php/calculateMonthlyContribution" style="rpc" />
       <wsdl:input>
         <soap:body use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
       </wsdl:input>
@@ -35,7 +35,7 @@
   </wsdl:binding>
   <wsdl:service name="Soap Service Test">
     <wsdl:port name="Soap Service TestPort" binding="tns:Soap Service TestBinding">
-      <soap:address location="http://192.168.1.141/IT140P_MP/savingsservice.php" />
+      <soap:address location="http://192.168.1.219/IT140P_MP/savingsservice.php" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

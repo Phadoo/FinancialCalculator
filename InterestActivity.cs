@@ -41,9 +41,9 @@ namespace FinancialCalculator
             txt2 = FindViewById<TextView>(Resource.Id.textView3);
             txt3 = FindViewById<TextView>(Resource.Id.textView4);
             txt4 = FindViewById<TextView>(Resource.Id.textView5);
-            rad = FindViewById<RadioButton>(Resource.Id.radioButton1);
-            rad1 = FindViewById<RadioButton>(Resource.Id.radioButton2);
-            time = FindViewById<RadioGroup>(Resource.Id.radioGroup1);
+            //rad = FindViewById<RadioButton>(Resource.Id.radioButton1);
+            //rad1 = FindViewById<RadioButton>(Resource.Id.radioButton2);
+            //time = FindViewById<RadioGroup>(Resource.Id.radioGroup1);
             spin = FindViewById<Spinner>(Resource.Id.spinner1);
             spin1 = FindViewById<Spinner>(Resource.Id.spinner2);
             timeRange = FindViewById<SeekBar>(Resource.Id.seekBar1);
@@ -52,10 +52,10 @@ namespace FinancialCalculator
             txt.Text = "Initial Investment";
             txt1.Text = "Interest Rate";
             txt2.Text = "Compound Interval";
-            txt3.Text = "Time Horizon";
+            txt3.Text = "Time Horizon (YEARS)";
             txt4.Text = " ";
-            rad.Text = "Years";
-            rad1.Text = "Months";
+            //rad.Text = "Years";
+            //rad1.Text = "Months";
             calculate.Text = "CALCULATE";
 
             calculate.Click += Calculate_Click;
@@ -103,13 +103,17 @@ namespace FinancialCalculator
 
         private void Calculate_Click(object sender, EventArgs e)
         {
+            decimal initial = Decimal.Parse(edit.Text);
+            decimal interest = Decimal.Parse(edit1.Text);
+            decimal time = Decimal.Parse(edit2.Text);
+
             interestCalc.FinancialCalculator ws = new interestCalc.FinancialCalculator();
 
             string appliedInterest = spin1.SelectedItem.ToString();
             string ratePeriod = spin.SelectedItem.ToString();
-            string compute = ws.compoundInterest( float.Parse(edit.Text), float.Parse(edit1.Text), appliedInterest, float.Parse(edit2.Text), ratePeriod).ToString();
+            string compute = ws.compoundInterest(initial, interest, appliedInterest, time, ratePeriod).ToString();
 
-            txt4.Text = compute;
+            txt4.Text = "Compound Interest: " + compute;
         }
 
         private void TimeRange_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)

@@ -79,7 +79,7 @@ namespace FinancialCalculator
 
             else
             {
-                roiCalc.SoapServiceTest ws = new roiCalc.SoapServiceTest();
+                roiCalc1.SoapServiceTest ws = new roiCalc1.SoapServiceTest();
 
 
                 string gotValue = ws.get_count(editTextRevenue.Text, editTextInvestment.Text, editTextYears.Text);

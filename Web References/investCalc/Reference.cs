@@ -14,16 +14,16 @@
 #pragma warning disable 1591
 
 namespace FinancialCalculator.investCalc {
-    using System;
-    using System.Web.Services;
     using System.Diagnostics;
-    using System.Web.Services.Protocols;
+    using System;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Web.Services.Protocols;
+    using System.Web.Services;
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="Investment CalculatorBinding", Namespace="urn:soaptest")]
@@ -35,7 +35,7 @@ namespace FinancialCalculator.investCalc {
         
         /// <remarks/>
         public InvestmentCalculator() {
-            this.Url = "http://192.168.1.141/IT140P_MP/investservice.php";
+            this.Url = "http://192.168.1.219/IT140P_MP/investservice.php";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -73,7 +73,7 @@ namespace FinancialCalculator.investCalc {
         public event calculate_final_amountCompletedEventHandler calculate_final_amountCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.141/IT140P_MP/investservice.php/calculate_final_amount", RequestNamespace="", ResponseNamespace="")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.219/IT140P_MP/investservice.php/calculate_final_amount", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public string calculate_final_amount(decimal startingAmount, decimal yearsToGrow, decimal returnRate, decimal additionalContribution, string contributionTiming) {
             object[] results = this.Invoke("calculate_final_amount", new object[] {
@@ -130,11 +130,11 @@ namespace FinancialCalculator.investCalc {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     public delegate void calculate_final_amountCompletedEventHandler(object sender, calculate_final_amountCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class calculate_final_amountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

@@ -45,7 +45,7 @@ namespace FinancialCalculator
                 double interestRate = Convert.ToDouble(interestInput.Text) / 100; // Convert interest rate to decimal
                 int loanTerm = Convert.ToInt32(loanTermInput.Text);
 
-                mortgageCalculation.MortgageCalculator mortgageCalculate = new mortgageCalculation.MortgageCalculator();
+                mortgageCalculation1.MortgageCalculator mortgageCalculate = new mortgageCalculation1.MortgageCalculator();
 
                 double monthlyPayment = mortgageCalculate.get_mortgage(loanAmount, interestRate, loanTerm);
 
@@ -72,13 +72,13 @@ namespace FinancialCalculator
             amortizationItemsLayout.RemoveAllViews();
 
             // Create an instance of the service client
-            var client = new mortgageCalculation.MortgageCalculator();
+            var client = new mortgageCalculation1.MortgageCalculator();
 
             // Call the get_mortgage method
             double monthlyPayment = client.get_mortgage(loanAmount, interestRate, loanTerm);
 
             // Call the create_amortizationschedule method
-            mortgageCalculation.AmortizationSchedule[] amortizationSchedule = client.create_amortizationschedule(loanAmount, interestRate, loanTerm, monthlyPayment);
+            mortgageCalculation1.AmortizationSchedule[] amortizationSchedule = client.create_amortizationschedule(loanAmount, interestRate, loanTerm, monthlyPayment);
 
             foreach (var scheduleItem in amortizationSchedule)
             {

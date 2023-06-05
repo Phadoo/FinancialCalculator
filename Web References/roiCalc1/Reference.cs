@@ -13,17 +13,17 @@
 // 
 #pragma warning disable 1591
 
-namespace FinancialCalculator.roiCalc {
-    using System;
-    using System.Web.Services;
+namespace FinancialCalculator.roiCalc1 {
     using System.Diagnostics;
-    using System.Web.Services.Protocols;
+    using System;
     using System.Xml.Serialization;
     using System.ComponentModel;
+    using System.Web.Services.Protocols;
+    using System.Web.Services;
     
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Web.Services.WebServiceBindingAttribute(Name="Soap Service TestBinding", Namespace="urn:soaptest")]
@@ -35,7 +35,7 @@ namespace FinancialCalculator.roiCalc {
         
         /// <remarks/>
         public SoapServiceTest() {
-            this.Url = "http://192.168.1.141/IT140P_MP/roiservice.php";
+            this.Url = "http://192.168.1.219/IT140P_MP/roiservice.php";
             if ((this.IsLocalFileSystemWebService(this.Url) == true)) {
                 this.UseDefaultCredentials = true;
                 this.useDefaultCredentialsSetExplicitly = false;
@@ -73,7 +73,7 @@ namespace FinancialCalculator.roiCalc {
         public event get_countCompletedEventHandler get_countCompleted;
         
         /// <remarks/>
-        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.141/IT140P_MP/roiservice.php/get_count", RequestNamespace="", ResponseNamespace="")]
+        [System.Web.Services.Protocols.SoapRpcMethodAttribute("http://192.168.1.219/IT140P_MP/roiservice.php/get_count", RequestNamespace="", ResponseNamespace="")]
         [return: System.Xml.Serialization.SoapElementAttribute("return")]
         public string get_count(string profit, string cost, string years) {
             object[] results = this.Invoke("get_count", new object[] {
@@ -126,11 +126,11 @@ namespace FinancialCalculator.roiCalc {
     }
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     public delegate void get_countCompletedEventHandler(object sender, get_countCompletedEventArgs e);
     
     /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.4084.0")]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Web.Services", "4.8.9032.0")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     public partial class get_countCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {

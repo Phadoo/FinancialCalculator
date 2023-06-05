@@ -7,14 +7,14 @@
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="compoundInterestRequest">
-    <wsdl:part name="initialBalance" type="xsd:double" />
-    <wsdl:part name="interestRate" type="xsd:double" />
+    <wsdl:part name="initialBalance" type="xsd:decimal" />
+    <wsdl:part name="interestRate" type="xsd:decimal" />
     <wsdl:part name="appliedInterest" type="xsd:string" />
-    <wsdl:part name="timeElapsed" type="xsd:double" />
+    <wsdl:part name="timeElapsed" type="xsd:decimal" />
     <wsdl:part name="ratePeriod" type="xsd:string" />
   </wsdl:message>
   <wsdl:message name="compoundInterestResponse">
-    <wsdl:part name="return" type="xsd:double" />
+    <wsdl:part name="return" type="xsd:string" />
   </wsdl:message>
   <wsdl:portType name="Financial CalculatorPortType">
     <wsdl:operation name="compoundInterest">
