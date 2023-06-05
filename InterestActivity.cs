@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Text;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 using Java.Lang;
 using System;
@@ -17,7 +18,7 @@ namespace FinancialCalculator
     [Activity(Label = "InterestActivity")]
     public class InterestActivity : Activity
     {
-        TextView txt, txt1, txt2, txt3, txt4;
+        TextView txt, txt1, txt2, txt3, txt4, txt5, txt6;
         EditText edit, edit1, edit2;
         Spinner spin, spin1;
         RadioGroup time;
@@ -41,6 +42,8 @@ namespace FinancialCalculator
             txt2 = FindViewById<TextView>(Resource.Id.textView3);
             txt3 = FindViewById<TextView>(Resource.Id.textView4);
             txt4 = FindViewById<TextView>(Resource.Id.textView5);
+            txt5 = FindViewById<TextView>(Resource.Id.textView6);
+            txt6 = FindViewById<TextView>(Resource.Id.textView7);
             //rad = FindViewById<RadioButton>(Resource.Id.radioButton1);
             //rad1 = FindViewById<RadioButton>(Resource.Id.radioButton2);
             //time = FindViewById<RadioGroup>(Resource.Id.radioGroup1);
@@ -53,7 +56,9 @@ namespace FinancialCalculator
             txt1.Text = "Interest Rate";
             txt2.Text = "Compound Interval";
             txt3.Text = "Time Horizon (YEARS)";
-            txt4.Text = " ";
+            txt4.Text = "Future investment value: ";
+            txt5.Text = "Total interest earned: ";
+            txt6.Text = "Initial balance: ";
             //rad.Text = "Years";
             //rad1.Text = "Months";
             calculate.Text = "CALCULATE";
@@ -103,6 +108,7 @@ namespace FinancialCalculator
 
         private void Calculate_Click(object sender, EventArgs e)
         {
+            /*
             decimal initial = Decimal.Parse(edit.Text);
             decimal interest = Decimal.Parse(edit1.Text);
             decimal time = Decimal.Parse(edit2.Text);
@@ -114,6 +120,43 @@ namespace FinancialCalculator
             string compute = ws.compoundInterest(initial, interest, appliedInterest, time, ratePeriod).ToString();
 
             txt4.Text = "Compound Interest: " + compute;
+            */
+
+
+            // Validate and parse input values
+            if (decimal.TryParse(edit.Text, out decimal initial) &&
+                decimal.TryParse(edit1.Text, out decimal interest) &&
+                decimal.TryParse(edit2.Text, out decimal time))
+            {
+                // Validate selected items
+                if (spin1.SelectedItem != null && spin.SelectedItem != null)
+                {
+                    string appliedInterest = spin1.SelectedItem.ToString();
+                    string ratePeriod = spin.SelectedItem.ToString();
+
+                    // Call the web service method
+                    interestCalc.FinancialCalculator ws = new interestCalc.FinancialCalculator();
+                    string compound = ws.compoundInterest(initial, interest, appliedInterest, time, ratePeriod);
+                    string earned = (float.Parse(compound) - float.Parse(edit.Text)).ToString("N2");
+
+                    txt4.Text = "Future investment value: ₱ " + compound.ToString();
+                    txt5.Text = "Total interest earned: ₱ " + earned;
+                    txt6.Text = "Initial balance: ₱ " + initial.ToString("N2");
+
+                    InputMethodManager imm = (InputMethodManager)GetSystemService(InputMethodService);
+                    imm.HideSoftInputFromWindow(edit.WindowToken, 0);
+                }
+                else
+                {
+                    // Show error message for missing selected items
+                    Toast.MakeText(this, "Please select interest type and rate period.", ToastLength.Short).Show();
+                }
+            }
+            else
+            {
+                // Show error message for invalid input values
+                Toast.MakeText(this, "Please enter valid numeric values for initial balance, interest rate, and time.", ToastLength.Short).Show();
+            }
         }
 
         private void TimeRange_ProgressChanged(object sender, SeekBar.ProgressChangedEventArgs e)

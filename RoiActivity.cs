@@ -19,7 +19,7 @@ namespace FinancialCalculator
         private EditText editTextRevenue;
         private EditText editTextYears;
         private Button buttonCalculate;
-        private Button buttonBack;
+        //private Button buttonBack;
         private TextView textViewResult;
 
 
@@ -40,7 +40,7 @@ namespace FinancialCalculator
             editTextRevenue = FindViewById<EditText>(Resource.Id.editTextRevenue);
             editTextYears = FindViewById<EditText>(Resource.Id.editTextYears);
             buttonCalculate = FindViewById<Button>(Resource.Id.buttonCalculate);
-            buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
+            //buttonBack = FindViewById<Button>(Resource.Id.buttonBack);
             textViewResult = FindViewById<TextView>(Resource.Id.textViewResult);
 
             var tableLayout = FindViewById<TableLayout>(Resource.Id.tableLayout);
@@ -51,7 +51,7 @@ namespace FinancialCalculator
             investmentLengthValue = FindViewById<TextView>(Resource.Id.investmentLengthValue);
 
             buttonCalculate.Click += ButtonCalculate_Click;
-            buttonBack.Click += ButtonBack_Click;
+            //buttonBack.Click += ButtonBack_Click;
         }
 
         private void ButtonCalculate_Click(object sender, System.EventArgs e)
